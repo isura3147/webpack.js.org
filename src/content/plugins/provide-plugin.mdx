@@ -31,8 +31,13 @@ By default, module resolution path is current folder (`./**)` and `node_modules`
 
 It is also possible to specify full path:
 
-```js
-const path = require("node:path");
+```javascript
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+// For compatibility with older Node.js versions
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 new webpack.ProvidePlugin({
   identifier: path.resolve(path.join(__dirname, "src/module1")),
